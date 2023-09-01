@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfEndProject.Views"
         xmlns:ViewModel="clr-namespace:WpfEndProject.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"  ResizeMode="NoResize" >
     <Window.DataContext>
         <ViewModel:MainViewModel />
     </Window.DataContext>
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        
+        <local:ToolBar Grid.Column="2"/>
         
     </Grid>
 </Window>

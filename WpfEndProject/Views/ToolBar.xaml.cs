@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WpfEndProject.Views
 {
     /// <summary>
-    /// Interaction logic for ToolKit.xaml
+    /// Interaction logic for ToolBar.xaml
     /// </summary>
-    public partial class ToolKit : UserControl
+    public partial class ToolBar : UserControl
     {
-        public ToolKit()
+        public ToolBar()
         {
             InitializeComponent();
         }
