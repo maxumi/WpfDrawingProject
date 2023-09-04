@@ -16,7 +16,8 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <local:ToolBar Grid.Column="2"/>
-        
+        <local:ToolBar Grid.Column=" 1"/>
+        <local:DrawingPad Grid.Column="0"/>
+
     </Grid>
 </Window>

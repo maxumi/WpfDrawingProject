@@ -3,31 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using WpfEndProject.Commands;
+
 
 namespace WpfEndProject.ViewModels
 {
     internal class ToolbarViewModel : ViewModelBase
     {
-        public ICommand SelectCommand { get; }
-        public ICommand DrawLineCommand { get; }
+        private bool isDrawing = false;
+
+        public ICommand DrawCommand { get; }
+        public ICommand EraseCommand { get; }
 
         public ToolbarViewModel()
         {
-            SelectCommand = new RelayCommand(ExecuteSelectCommand);
-            DrawLineCommand = new RelayCommand(ExecuteDrawLineCommand);
-
+            DrawCommand = new RelayCommand(ExecuteDrawCommand);
+            EraseCommand = new RelayCommand(ExecuteEraseCommand);
         }
 
-        private void ExecuteSelectCommand()
+        // Bind this property to the InkCanvas's EditingMode property in XAML.
+        public InkCanvasEditingMode CurrentEditingMode
         {
-            // Implement logic for the Select button
+            get { return isDrawing ? InkCanvasEditingMode.Ink : InkCanvasEditingMode.EraseByStroke; }
         }
 
-        private void ExecuteDrawLineCommand()
+        private void ExecuteDrawCommand()
         {
-            // Implement logic for the Draw Line button
+            isDrawing = true;
+            OnPropertyChanged(nameof(CurrentEditingMode)); // Notify that the editing mode has changed.
+        }
+
+        private void ExecuteEraseCommand()
+        {
+            isDrawing = false;
+            OnPropertyChanged(nameof(CurrentEditingMode)); // Notify that the editing mode has changed.
         }
     }
 }
