@@ -8,37 +8,35 @@ using System.Windows.Input;
 using WpfEndProject.Commands;
 
 
+
 namespace WpfEndProject.ViewModels
 {
     internal class ToolbarViewModel : ViewModelBase
     {
-        private bool isDrawing = false;
+        public event EventHandler? EraserButtonClicked;
+        public event EventHandler? DrawButtonClicked;
 
-        public ICommand DrawCommand { get; }
-        public ICommand EraseCommand { get; }
+        private ICommand _eraserCommand;
+        public ICommand EraserCommand => _eraserCommand;
 
-        public ToolbarViewModel()
+        private ICommand _drawCommand;
+        public ICommand DrawCommand => _drawCommand;
+
+        public ToolbarViewModel() 
         {
-            DrawCommand = new RelayCommand(ExecuteDrawCommand);
-            EraseCommand = new RelayCommand(ExecuteEraseCommand);
+            _drawCommand = new RelayCommand(DrawClick);
+            _eraserCommand = new RelayCommand(EraserClick);
+
         }
 
-        // Bind this property to the InkCanvas's EditingMode property in XAML.
-        public InkCanvasEditingMode CurrentEditingMode
+        private void DrawClick()
         {
-            get { return isDrawing ? InkCanvasEditingMode.Ink : InkCanvasEditingMode.EraseByStroke; }
+            DrawButtonClicked?.Invoke(this, EventArgs.Empty);
+        }
+        private void EraserClick()
+        {
+            EraserButtonClicked?.Invoke(this, EventArgs.Empty);
         }
 
-        private void ExecuteDrawCommand()
-        {
-            isDrawing = true;
-            OnPropertyChanged(nameof(CurrentEditingMode)); // Notify that the editing mode has changed.
-        }
-
-        private void ExecuteEraseCommand()
-        {
-            isDrawing = false;
-            OnPropertyChanged(nameof(CurrentEditingMode)); // Notify that the editing mode has changed.
-        }
     }
 }

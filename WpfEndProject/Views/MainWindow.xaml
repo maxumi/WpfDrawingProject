@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:WpfEndProject.Views"
         xmlns:ViewModel="clr-namespace:WpfEndProject.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"  ResizeMode="NoResize" >
+        Title="MainWindow" Height="450" Width="800"  ResizeMode="NoResize">
     <Window.DataContext>
         <ViewModel:MainViewModel />
     </Window.DataContext>
-    
-    <Grid>
+
+    <Grid Background="{Binding BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <local:ToolBar Grid.Column=" 1"/>
-        <local:DrawingPad Grid.Column="0"/>
+        <!-- <local:DrawingPad  Grid.Column="0" DataContext="{Binding DrawingPad}"/> -->
+        <local:ToolBar  Grid.Column="1" DataContext="{Binding ToolBar}" />
 
     </Grid>
 </Window>
