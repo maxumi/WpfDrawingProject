@@ -15,6 +15,8 @@ namespace WpfEndProject.ViewModels
     {
         public event EventHandler? EraserButtonClicked;
         public event EventHandler? DrawButtonClicked;
+        public event EventHandler? RestartButtonClicked;
+
 
         private ICommand _eraserCommand;
         public ICommand EraserCommand => _eraserCommand;
@@ -22,20 +24,15 @@ namespace WpfEndProject.ViewModels
         private ICommand _drawCommand;
         public ICommand DrawCommand => _drawCommand;
 
+        private ICommand _RestartCommand;
+        public ICommand RestartCommand => _RestartCommand;
+
         public ToolbarViewModel() 
         {
-            _drawCommand = new RelayCommand(DrawClick);
-            _eraserCommand = new RelayCommand(EraserClick);
+            _drawCommand = new RelayCommand(() => DrawButtonClicked?.Invoke(this, EventArgs.Empty));
+            _eraserCommand = new RelayCommand(() => EraserButtonClicked?.Invoke(this, EventArgs.Empty));
+            _RestartCommand = new RelayCommand(() => RestartButtonClicked?.Invoke(this, EventArgs.Empty));
 
-        }
-
-        private void DrawClick()
-        {
-            DrawButtonClicked?.Invoke(this, EventArgs.Empty);
-        }
-        private void EraserClick()
-        {
-            EraserButtonClicked?.Invoke(this, EventArgs.Empty);
         }
 
     }

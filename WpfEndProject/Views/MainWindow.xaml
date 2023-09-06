@@ -16,8 +16,8 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <!-- <local:DrawingPad  Grid.Column="0" DataContext="{Binding DrawingPad}"/> -->
-        <local:ToolBar  Grid.Column="1" DataContext="{Binding ToolBar}" />
+        <local:DrawingPad  Grid.Column="0" DataContext="{Binding DrawingPad}"/>
+        <local:ToolBar  Grid.Column="1" DataContext="{Binding ToolBar}"/>
 
     </Grid>
 </Window>

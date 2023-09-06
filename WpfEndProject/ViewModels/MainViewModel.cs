@@ -9,38 +9,28 @@ namespace WpfEndProject.ViewModels
 {
     internal class MainViewModel : ViewModelBase
     {
-        private Brush _backgroundColor = Brushes.White; // Initial background color
-
-        public Brush BackgroundColor
-        {
-            get => _backgroundColor;
-            set
-            {
-                _backgroundColor = value;
-                OnPropertyChanged(nameof(BackgroundColor));
-            }
-        }
 
         public ToolbarViewModel ToolBar { get; } = new ToolbarViewModel();
-        public DrawingPadViewModel DrawingPad { get; } = new DrawingPadViewModel();
+        public DrawingPadViewModel DrawingPad { get; set; } = new DrawingPadViewModel();
 
         public MainViewModel()
         {
             ToolBar.DrawButtonClicked += OnDrawButtonClicked;
             ToolBar.EraserButtonClicked += OnEraserButtonClicked;
+            ToolBar.RestartButtonClicked += OnRestartButtonClicked;
+        }
+        private void OnDrawButtonClicked(object? sender, EventArgs e)
+        {
+            DrawingPad.Type = "Ink";
         }
         private void OnEraserButtonClicked(object? sender, EventArgs e)
         {
-            BackgroundColor = Brushes.Blue;
-            // Handle the Eraser button click here
-            // For example, change some properties related to erasing
+            DrawingPad.Type = "EraseByPoint";
         }
-
-        private void OnDrawButtonClicked(object? sender, EventArgs e)
+        private void OnRestartButtonClicked(object? sender, EventArgs e)
         {
-            BackgroundColor = Brushes.Red;
-            // Handle the Draw button click here
-            // For example, change some properties related to drawing
+            //Clear drawing pad 
+            DrawingPad.Type = "ClearStroke";
         }
 
 

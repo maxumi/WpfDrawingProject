@@ -7,9 +7,12 @@
              xmlns:ViewModel="clr-namespace:WpfEndProject.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
+    <UserControl.DataContext>
+        <ViewModel:DrawingPadViewModel />
+        <!-- Set the DataContext to your ViewModel -->
+    </UserControl.DataContext>
     <Grid>
-        <InkCanvas/>
+        <InkCanvas Name="inkCanvas" EditingMode="{Binding Type}" />
     </Grid>
-    
+
 </UserControl>
