@@ -9,19 +9,19 @@ namespace WpfEndProject.Commands
 {
     internal class RelayCommand : ICommand
     {
-        private Action methodToExecute;
-        private Func<bool> canExecuteEvaluator;
+        private Action<object?> methodToExecute;
+        private Func<object?, bool> canExecuteEvaluator;
 
-        public RelayCommand(Action methodToExecute, Func<bool> canExecute)
+        public RelayCommand(Action<object?> methodToExecute, Func<object?, bool> canExecute)
         {
             this.methodToExecute = methodToExecute;
             this.canExecuteEvaluator = canExecute;
         }
 
-        public RelayCommand(Action methodToExecute)
+        public RelayCommand(Action<object?> methodToExecute)
         {
             this.methodToExecute = methodToExecute;
-            this.canExecuteEvaluator = () => true;
+            this.canExecuteEvaluator = _ => true;
         }
 
         public event EventHandler? CanExecuteChanged
@@ -30,8 +30,8 @@ namespace WpfEndProject.Commands
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        public bool CanExecute(object? parameter) => canExecuteEvaluator?.Invoke() ?? true;
+        public bool CanExecute(object? parameter) => canExecuteEvaluator?.Invoke(parameter) ?? true;
 
-        public void Execute(object? parameter) => methodToExecute?.Invoke();
+        public void Execute(object? parameter) => methodToExecute?.Invoke(parameter);
     }
 }

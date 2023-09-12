@@ -34,10 +34,10 @@ namespace WpfEndProject.ViewModels
 
         public ToolbarViewModel() 
         {
-            _drawCommand = new RelayCommand(() => DrawButtonClicked?.Invoke(this, EventArgs.Empty));
-            _eraserCommand = new RelayCommand(() => EraserButtonClicked?.Invoke(this, EventArgs.Empty));
-            _RestartCommand = new RelayCommand(() => RestartButtonClicked?.Invoke(this, EventArgs.Empty));
-            _ColorCommand = new TestRelayCommand(parameter => ChangeColorButtonClicked?.Invoke(this, new ColorEventArgs(parameter)));
+            _drawCommand = new RelayCommand(parameter => DrawButtonClicked?.Invoke(this, EventArgs.Empty));
+            _eraserCommand = new RelayCommand(parameter => EraserButtonClicked?.Invoke(this, EventArgs.Empty));
+            _RestartCommand = new RelayCommand(parameter => RestartButtonClicked?.Invoke(this, EventArgs.Empty));
+            _ColorCommand = new RelayCommand(parameter => ChangeColorButtonClicked?.Invoke(this, new ColorEventArgs(parameter)));
 
         }
 
