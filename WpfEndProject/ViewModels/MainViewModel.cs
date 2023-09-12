@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Ink;
 using System.Windows.Media;
+using WpfEndProject.EventArgsCustom;
 
 namespace WpfEndProject.ViewModels
 {
@@ -18,6 +21,7 @@ namespace WpfEndProject.ViewModels
             ToolBar.DrawButtonClicked += OnDrawButtonClicked;
             ToolBar.EraserButtonClicked += OnEraserButtonClicked;
             ToolBar.RestartButtonClicked += OnRestartButtonClicked;
+            ToolBar.ChangeColorButtonClicked += OnColorChangeButtonClicked;
         }
         private void OnDrawButtonClicked(object? sender, EventArgs e)
         {
@@ -29,10 +33,25 @@ namespace WpfEndProject.ViewModels
         }
         private void OnRestartButtonClicked(object? sender, EventArgs e)
         {
-            //Clear drawing pad 
-            DrawingPad.Type = "ClearStroke";
-        }
+            DrawingPad.InkCanvasStrokes.Clear();
 
+        }
+        private void OnColorChangeButtonClicked(object? sender, EventArgs EventSomething)
+        {
+            ColorEventArgs ColorEventArg = (ColorEventArgs)EventSomething;
+
+            
+            MessageBox.Show($"{ColorEventArg.Color}");
+
+            if (ColorConverter.ConvertFromString(ColorEventArg.Color) is Color newColor)
+            {
+                // Update the MyDrawingAttributes color
+                DrawingAttributes draw = new DrawingAttributes();
+                draw.Color = newColor;
+                DrawingPad.MyDrawingAttributes = draw;
+            }
+            
+        }
 
     }
 }

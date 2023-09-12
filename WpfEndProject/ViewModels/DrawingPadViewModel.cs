@@ -5,18 +5,45 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Ink;
 using System.Windows.Media;
 
 namespace WpfEndProject.ViewModels
 {
     internal class DrawingPadViewModel : ViewModelBase
     {
-        public InkCanvas inkCanvas { get; set; }
 
         public DrawingPadViewModel()
         {
-            inkCanvas = new InkCanvas();
+            _myDrawingAttributes = new() { Color = Colors.Red };
         }
+
+        private DrawingAttributes _myDrawingAttributes;
+        public DrawingAttributes MyDrawingAttributes
+        {
+            get { return _myDrawingAttributes; }
+            set
+            {
+                if (_myDrawingAttributes != value)
+                {
+                    _myDrawingAttributes = value;
+                    OnPropertyChanged(nameof(MyDrawingAttributes));
+                }
+            }
+        }
+
+        private StrokeCollection inkCanvasStrokes = new StrokeCollection();
+
+        public StrokeCollection InkCanvasStrokes
+        {
+            get { return inkCanvasStrokes; }
+            set
+            {
+                inkCanvasStrokes = value;
+                OnPropertyChanged(nameof(InkCanvasStrokes));
+            }
+        }
+
 
         private string _type = "Ink";
 
@@ -26,44 +53,8 @@ namespace WpfEndProject.ViewModels
             set
             {
                 _type = value;
-                SetEditingModeFromType();
                 OnPropertyChanged(nameof(Type));
-
-
             }
         }
-
-        private void SetEditingModeFromType()
-        {
-            switch (_type)
-            {
-                case "Ink":
-                    inkCanvas.EditingMode = InkCanvasEditingMode.Ink;
-                    break;
-                case "Select":
-                    inkCanvas.EditingMode = InkCanvasEditingMode.Select;
-                    break;
-                case "EraseByStroke":
-                    inkCanvas.EditingMode = InkCanvasEditingMode.EraseByStroke;
-                    break;
-                case "EraseByPoint":
-                    inkCanvas.EditingMode = InkCanvasEditingMode.EraseByPoint;
-                    break;
-                case "GestureOnly":
-                    inkCanvas.EditingMode = InkCanvasEditingMode.GestureOnly;
-                    break;
-                case "InkAndGesture":
-                    inkCanvas.EditingMode = InkCanvasEditingMode.InkAndGesture;
-                    break;
-                case "ClearStroke":
-                    //WIP
-                    break;
-                default:
-                    // Handle unsupported input or set a default mode
-                    break;
-            }
-        }
-
-
     }
 }

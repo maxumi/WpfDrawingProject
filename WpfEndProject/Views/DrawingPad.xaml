@@ -11,8 +11,13 @@
         <ViewModel:DrawingPadViewModel />
         <!-- Set the DataContext to your ViewModel -->
     </UserControl.DataContext>
+
+
+
+    
+    
     <Grid>
-        <InkCanvas Name="inkCanvas" EditingMode="{Binding Type}" />
+        <InkCanvas Name="inkCanvas" EditingMode="{Binding Type}" Strokes="{Binding InkCanvasStrokes}" DefaultDrawingAttributes="{Binding MyDrawingAttributes}"/>
     </Grid>
 
 </UserControl>

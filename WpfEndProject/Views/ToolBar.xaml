@@ -20,6 +20,11 @@
                 </Style>
             </Style.Resources>
         </Style>
+
+        <Style x:Key="SmallColorStyle" TargetType="Button">
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="Height" Value="15"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -30,18 +35,21 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Button Grid.Column="0" Content="Pencil" MaxHeight="20" MaxWidth="50" Command="{Binding DrawCommand}" Style="{StaticResource RoundedButtons}"/>
-
         <Button Grid.Column="1" Content="Eraser" MaxHeight="20" MaxWidth="50" Command="{Binding EraserCommand}" Style="{StaticResource RoundedButtons}"/>
 
         <Button Grid.Row="1" Content="Restart" MaxHeight="20" MaxWidth="50" Command="{Binding RestartCommand}" Style="{StaticResource RoundedButtons}"/>
 
-
-
-
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="13,35,0,0">
+            <Button Style="{StaticResource SmallColorStyle}" Background="Black" Command="{Binding ColorCommand}" CommandParameter="Black"/>
+            <Button Style="{StaticResource SmallColorStyle}" Background="Red" Command="{Binding ColorCommand}" CommandParameter="Red"/>
+            <Button Style="{StaticResource SmallColorStyle}" Background="Green" Command="{Binding ColorCommand}" CommandParameter="Green"/>
+            <Button Style="{StaticResource SmallColorStyle}" Background="Blue" Command="{Binding ColorCommand}" CommandParameter="Blue"/>
+            <Button Style="{StaticResource SmallColorStyle}" Background="Yellow" Command="{Binding ColorCommand}" CommandParameter="Yellow"/>
+        </StackPanel>
     </Grid>
 </UserControl>
